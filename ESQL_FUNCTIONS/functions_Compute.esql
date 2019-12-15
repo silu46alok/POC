@@ -1,0 +1,32 @@
+CREATE COMPUTE MODULE functions_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+
+		
+		SET OutputRoot.XMLNSC.applicationlabel		= ApplicationLabel;
+		SET OutputRoot.XMLNSC.AdditionalInstances	= AdditionalInstances;
+		SET OutputRoot.XMLNSC.BrokerDataSource		= BrokerDataSource;
+		SET OutputRoot.XMLNSC.BrokerName			= BrokerName;
+		SET OutputRoot.XMLNSC.BrokerUserId			= BrokerUserId;
+		SET OutputRoot.XMLNSC.BrokerVersion			= BrokerVersion;
+		SET OutputRoot.XMLNSC.CommitCount			= CommitCount;
+		SET OutputRoot.XMLNSC.CommitInterval		= CommitInterval;
+		SET OutputRoot.XMLNSC.DataSourceUserId		= DataSourceUserId;
+		SET OutputRoot.XMLNSC.DataSource			= DataSource;
+		SET OutputRoot.XMLNSC.ExecutionGroupLabel	= ExecutionGroupLabel;
+		SET OutputRoot.XMLNSC.ExecutionGroupName	= ExecutionGroupName;
+		SET OutputRoot.XMLNSC.LibraryLabel			= LibraryLabel;
+		SET OutputRoot.XMLNSC.MessageFlowLabel		= MessageFlowLabel;
+		SET OutputRoot.XMLNSC.MessageOptions		= MessageOptions;
+		SET OutputRoot.XMLNSC.NodeLabel				= NodeLabel;
+		SET OutputRoot.XMLNSC.NodeType				= NodeType;
+		SET OutputRoot.XMLNSC.ProcessId				= ProcessId;
+		SET OutputRoot.XMLNSC.QueueManagerName		= QueueManagerName;
+		SET OutputRoot.XMLNSC.WorkPath				= WorkPath;
+		
+		
+		RETURN TRUE;
+	END;
+
+	
+END MODULE;
