@@ -1,0 +1,62 @@
+
+
+CREATE COMPUTE MODULE handler_Compute
+	CREATE FUNCTION Main() RETURNS BOOLEAN
+	BEGIN
+		-- CALL CopyMessageHeaders();
+		-- CALL CopyEntireMessage();
+		
+		/*DECLARE EXIT HANDLER FOR SQLSTATE LIKE '%'
+		BEGIN 
+			PASSTHRU 'ROLLBACK';
+			RESIGNAL;
+		END;*/
+		
+		
+		/*Exit- Stop processing in this node after handler error
+		It means when it get the same error it will execute the exit handler statement and stop executing the rest esql statement.
+		But it will not throw any exception to input node */
+	
+		
+--	DECLARE EXIT HANDLER FOR SQLSTATE 'U1234'
+--	BEGIN 
+--		SET OutputRoot.XMLNSC.Data.ExitHAndler ='Handled Exception U1234';
+--	END;
+--	 	SET OutputRoot.XMLNSC.Data.ExitBefore ='Before Exception';
+--		
+--		Throw USER EXCEPTION VALUES ('1' ,'U1234');
+--		SET OutputRoot.XMLNSC.Data.ExitAfter ='Did not get here';
+--		RETURN TRUE;
+
+	
+		/*Here we will get output :
+		Data
+			ExitBefore Before Exception
+			ExitHAndler Handled Exception U1234*/
+	
+--	END;
+	
+		/*Continue- Continue processing with next statement after handler error
+		It means when it get the same error it will process ahead..i.e it will execute the exithandler statement and execute the rest esql statements. 
+		But it will not throw any exception and roll back to input node*/
+		
+		DECLARE CONTINUE HANDLER FOR SQLSTATE 'U1234'
+	BEGIN 
+		SET OutputRoot.XMLNSC.Data.ExitHAndler ='Handled Exception U1234';
+	END;
+	 	SET OutputRoot.XMLNSC.Data.ExitBefore ='Before Exception';
+		
+		Throw USER EXCEPTION VALUES ('1' ,'U1234');
+		SET OutputRoot.XMLNSC.Data.ExitAfter ='Did not get here';
+		RETURN TRUE;
+		
+		
+		/*Here we will get output :
+		Data
+			ExitBefore Before Exception
+			ExitHAndler Handled Exception U1234
+			ExitAfter Did not get here*/
+	END;
+
+
+END MODULE;
